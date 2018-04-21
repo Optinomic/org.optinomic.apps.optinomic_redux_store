@@ -1,0 +1,51 @@
+<head>
+    __opapp_include(../lib/polymer/templates/head.html)
+    <link rel="import" href="iron-icons/iron-icons.html">
+    <link rel="import" href="paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="paper-button/paper-button.html">
+    <link rel="import" href="iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="iron-flex-layout/iron-flex-layout-classes.html">
+</head>
+__opapp_include(../lib/polymer/styles/shared-styles.m4) __opapp_include(../lib/polymer/elements/optinomic-redux-store.html)
+<dom-module id="optinomic-app">
+    <template>
+        <style include="shared-styles">
+        :host {
+            display: block;
+            margin-left: -5px;
+            padding-bottom: 12px;
+            font-family: 'Roboto', sans-serif !important;
+        }
+        </style>
+        <div>
+            <template is="dom-if" if="[[loading]]">
+                <p>Loading...</p>
+            </template>
+        </div>
+        <div>
+            <template is="dom-if" if="[[patient.data]]">
+                <p style$="color:[[patient.data.extras.color_main]]">[[patient.data.extras.full_name]]</p>
+            </template>
+        </div>
+        <div class="">
+            <h1>[[params.appName]]</h1>
+            <p>[[params.appName]] | Admin = [[clinic.data.admin_name]] | [[patient.data.last_name]] [[patient.data.first_name]]</p>
+            <div class="circle">[[params.patientID]]</div>
+            <h1>Patient</h1>
+            <p>1) [[patients.current.data.last_name]]</p>
+            <p>2) [[patient.data.last_name]]</p>
+            <p>3) [[patient.last_name]]</p>
+            <p>4) [[gender]]</p>
+        </div>
+        <div id="container">
+            <paper-button on-tap="debugdoc" class="pink">Debug</paper-button>
+            <paper-button on-tap="debugdoc" raised class="indigo">getClinic [[clinic.data.array.length]]</paper-button>
+            <paper-button on-tap="debugdoc" toggles raised class="green">Debug</paper-button>
+        </div>
+        <div id="container">
+            <paper-icon-button on-tap="refresh_data" icon="favorite"></paper-icon-button>
+            <paper-icon-button on-tap="refresh_data" icon="menu" class="indigo"></paper-icon-button>
+            <paper-icon-button on-tap="refresh_data" icon="star"></paper-icon-button>
+        </div>
+    </template>
+</dom-module>
